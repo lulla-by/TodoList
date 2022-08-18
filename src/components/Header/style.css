@@ -1,0 +1,14 @@
+.Header {
+  background-color: plum;
+  border-radius: 15px;
+}
+.todoList {
+  display: inline-block;
+  padding-left: 10px;
+}
+
+.react {
+  display: inline-block;
+  float: right;
+  padding-right: 10px;
+}

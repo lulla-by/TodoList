@@ -1,0 +1,111 @@
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [todos, setTodos] = useState([
+    {
+      id: 1,
+      title: "리액트공부하기",
+      body: "리액트 기초를 공부해봅시다",
+      isdone: false
+    },
+  ]);
+
+  return (
+    <div className="container">
+      <div className="top">
+        <p className="todoList">My Todo List</p> 
+        <p className="react">React</p>
+      </div>
+      <div className="input">
+        제목 <input
+          type="text"
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        내용 <input
+          type="text"
+          value={body}
+          onChange={(event) => {
+            setBody(event.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            setTodos([...todos, { id: todos.length + 1, title: title, body: body, isdone: false }]);
+          }}
+        >
+          추가하기
+        </button></div>
+
+      <div>
+
+        <h1>Working...🔥</h1>
+        <div className="todos-container">
+          {
+            todos.map(function (todo, i) {
+              if (todo.isdone == false) {
+                return <div className="todo" key={todo.id}>
+                  <h2>{todo.title}</h2>
+                  <p>{todo.body}</p>
+
+                  <button className="btn" onClick={() => {
+                    let copy = [...todos]
+                    copy.splice(i, 1)
+                    setTodos(copy);
+                  }}>삭제하기</button>
+                  <button className="btn" onClick={() => {
+                    let copy = [...todos]
+                    copy[i].isdone = true
+                    setTodos(copy);
+                  }}>확인</button>
+
+                </div>
+              }
+            }
+
+            )
+          }
+        </div>
+      </div>
+
+      <div>
+        <h1>Done...🎉</h1>
+        <div className="todos-container">
+          {
+            todos.map(function (todo, i) {
+              if (todo.isdone == true) {
+                return <div className="todo" key={todo.id}>
+                  <h2>{todo.title}</h2>
+                  <p>{todo.body}</p>
+
+                  <button className="btn" onClick={() => {
+                    let copy = [...todos]
+                    copy.splice(i, 1)
+                    setTodos(copy);
+                  }}>삭제하기</button>
+
+                  <button className="btn" onClick={() => {
+                    let copy = [...todos]
+                    copy[i].isdone = false
+                    setTodos(copy);
+                  }}>취소</button>
+                </div>
+              }
+            }
+
+            )
+
+          }
+        </div>
+      </div>
+
+
+    </div>
+  );
+}
+export default App;
